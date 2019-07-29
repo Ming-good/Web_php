@@ -1,8 +1,9 @@
 RewriteEngine On
 RewriteCond %{HTTPS} off
-RewriteRule (.*) https://%{SERVER_NAME}/ 
-RewriteRule ^([^.?]+)$ %{REQUEST_URI}.php [L]
-RewriteCond %{REQUEST_URI} \.jsp$
-RewriteRule ^(.*)\.jsp+$ /$1\.php [L]
-RewriteCond %{REQUEST_URI} \.html$
-RewriteRule ^(.*)\.html+$ /$1\.php [L]
+RewriteRule (.*) https://%{SERVER_NAME}/ [L]
+
+#확장자 숨기기
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteCond %{REQUEST_URI} !/$
+RewriteRule (.*) $1\.php [L]
+

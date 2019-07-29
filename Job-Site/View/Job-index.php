@@ -16,6 +16,7 @@
 <link rel=" shortcut icon" href="assets/image/favicon.ico">
 <link rel="icon" href="assets/image/favicon.ico">
 <body>
+	<!-- 네비게이션 -->
 	<nav id="nav">
           <ul class="container">
 	 <div class="logo">
@@ -28,11 +29,12 @@
           </ul>
         </nav>
 
+	<!-- 로그인 -->
 	<div class = "cont_top">
 	 <form method="POST" action="">
 	  <div class="wrap_my">
 	   <div >
-	    <a class="user_login" href="Login/Sign-up">회원가입</a>
+	    <a class="user_login" href="Sign-up">회원가입</a>
 	    <a class="user_finding"  href="">아이디/비밀번호 찾기</a>
 	   </div>		
 	   <div class ="login_input">
@@ -50,15 +52,6 @@
 	 </form>
 	</div>
 
-
-
-
-
-
-
-
-
-
-
+	
 </body>
 </html>

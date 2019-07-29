@@ -88,7 +88,7 @@
 						<div class="col-4 col-6-medium col-12-small">
 							<article class="box style2">
 								<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-								<h3><a href="Job-Site/Job-index">구인구직사이트<br>(프레임워크X)</a></h3>
+								<h3><a href="Job-Site/home">구인구직사이트<br>(프레임워크X)</a></h3>
 								<p>Ornare nulla proin odio consequat.</p>
 							</article>
 						</div>
