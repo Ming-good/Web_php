@@ -13,5 +13,4 @@ class Routing
 
 	
 }
-new DB();
 require_once 'wep.php';
