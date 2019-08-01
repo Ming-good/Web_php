@@ -21,7 +21,7 @@
 	<nav id="nav">
           <ul class="container">
 	 <div class="logo">
-	  <a href="home" target="_blank"><img src="assets/image/Ming_logo_blue.png" class="logo" alt="logo" border="3px" width="200px" height="75px" align="left"></a>
+	  <a href="" target="_blank"><img src="assets/image/Ming_logo_blue.png" class="logo" alt="logo" border="3px" width="200px" height="75px" align="left"></a>
  	 </div>
            <li><a class="link" href="#top">Top</a></li>
            <li><a class="link" href="#work">Work</a></li>
@@ -30,8 +30,10 @@
           </ul>
         </nav>
 
-@yield('Content')
-@yield('test')
+<?php echo $__env->yieldContent('Content'); ?>
+
+<?php echo $__env->yieldContent('test'); ?>
 	
 </body>
 </html>
+<?php /**PATH /var/www/html/Job-Site/View////layout/layout.blade.php ENDPATH**/ ?>

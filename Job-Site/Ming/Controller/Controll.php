@@ -3,8 +3,15 @@ namespace Ming\Controller;
 use duncan3dc\Laravel\BladeInstance;
 class Controll
 {
-	public function Command($url, $separation)
+
+
+	public static $obj;
+
+	public function Command($url, array $separation)
 	{
+		//블레이드 템플릿을 사용하기 위한 설정(view파일 경로, cache파일 경로)
+		self::$obj = new BladeInstance("/var/www/html/Job-Site/View", "/var/www/html/Job-Site/cache/View");
+		//URL검사를 한 후  해당 컨트롤러의 함수로 보내줌
 		$Bool = $this -> Url_Check($url);
 		if($Bool)
 		{
@@ -17,7 +24,7 @@ class Controll
 		
 	}
 
-
+	//GET으로 입력받은 URL과 Route의 wep.php에서 입력한 URL간에 검사 위한 함수
 	public function Url_Check($url)
 	{
 		if($url == $_GET['url'])
@@ -25,10 +32,16 @@ class Controll
 			return TRUE;
 		}
 	}
+
+	public static function __callstatic($method, array $args)
+	{
+		if($method == 'view')
+		{
+			
+			echo self::$obj->render(...$args);
+		}
+		
+		
+	}
 }
 
-function View($File)
-{
-	$obj = new BladeInstance("/var/www/html/Job-Site/View", "/var/www/html/Job-Site/cache/View");
-	echo $obj->render($File);
-}

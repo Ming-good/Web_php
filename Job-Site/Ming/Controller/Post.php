@@ -9,10 +9,11 @@ class Post extends Controll
 
 		$db = DB::PDO();
 
-		return view('index');
+		Controll:: view('index');
 	}
 	public function store()
 	{
-		return view('Login/Sign-up');
+		$test = [20,50,60];
+		Controll:: view('SignUp/SignUp', compact('test'));
 	}
 }
