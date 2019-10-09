@@ -30,3 +30,7 @@
 `Job-Site/Ming/DB/dbconfig.php`
  
  
+  <script src="/Job-Site/vender/ml/tf.js"></script>
+  <script src="/Job-Site/vender/ml/web.js"></script>
+  <script src="/Job-Site/assets/js/index.js" defer></script>
+
