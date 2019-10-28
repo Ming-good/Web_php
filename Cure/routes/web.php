@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', 'test1@index');
-Route::get('area', 'test1@areaCode');
-Route::get('tourism', 'test1@tourism');
+Route::get('tourism', 'api@index');
+Route::get('tourism/area', 'api@areaCode');
+Route::get('tourism/map', 'api@tourism');
+Route::get('tourism/introduction', 'api@content');
+
+
+Route::post('basket/resource', 'basketController@store');
+Route::post('basket/destroy', 'basketController@delete');
+Route::get('basket/page', 'basketController@index');
+
