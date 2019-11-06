@@ -6,39 +6,35 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\basket;
 
-class basketController extends Controller
+class tourBasketController extends Controller
 {
-	public function index()
-	{
-		$page = $_GET['page']-1;
-		$curent = $page*8;
-		$basket = new basket;
-		$data = $basket -> skip($curent) -> take(8)  -> get();
-
-		echo json_encode($data);
-
-
-
-	}
 
 	public function store(Request $request)
 	{
 		$title = $request -> input('title');
 		$contentid = $request -> input('contentid');
 		$contenttypeid = $request -> input('contenttypeid');
-
+		$xmap = $request -> input('xmap');
+		$ymap = $request -> input('ymap');
 
 		$basket = new basket;
+		$count = $basket -> where('userID', 'read1516') -> count();
 		$result = $basket -> where('contentid', $contentid) -> first();
-		if($result == NULL) {
+		if($count<10 && $result == NULL) {
 			$basket -> userID = 'read1516';
 			$basket -> title = $title;
 			$basket -> contentid = $contentid;
 			$basket -> contenttypeid = $contenttypeid;
+			$basket -> ymap = $ymap;
+			$basket -> xmap = $xmap;
+
 			$basket -> save();
-		} else {
+		} else if($result != NULL) {
 			$result = 'false';
+		} else {
+			$result = 'limit';
 		}
+		
 
 
 		echo $result;

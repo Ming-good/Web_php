@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\basket;
 
-class api extends Controller
+class TravelApi extends Controller
 {
 	#지역 정보를 가져옵니다. 
 	public function index()
@@ -22,9 +23,9 @@ class api extends Controller
 		$item = $result -> response -> body -> items -> item;
 
 		$basket = new basket;
-		$totalPage = $basket -> count();
+		$tourBasket = $basket -> select('title','contentid') -> where('userID', 'read1516') -> get();
 
-		return view('/layout/welcome', compact( 'item', 'totalPage'));
+		return view('tourism', compact( 'item', 'tourBasket'));
 	}
 
 	#해당 도의 시/군/구의 정보를 가져옵니다.	
@@ -120,6 +121,7 @@ class api extends Controller
 		$response = curl_exec($services);
 		$subIntroduction = json_decode($response);
 
+		#이미지 조회
 		$url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?serviceKey=NLK0f3%2Fl8O1lBfUuZ%2FNekbZg9uSXFAVmT9UBnBJXfy96YsdbcQFzQX1avklkLXI4445GKEHwNPrQFnmpIATxTQ%3D%3D&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=MingGood&contentId=".$contentid."&imageYN=Y&subImageYN=Y&_type=json";
 		$services = curl_init();
 		curl_setopt($services, CURLOPT_RETURNTRANSFER, true);
@@ -134,5 +136,6 @@ class api extends Controller
 
 
 	}
+
 
 }

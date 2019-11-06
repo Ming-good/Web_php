@@ -19,6 +19,8 @@ class CreateBasketsTable extends Migration
 	    $table->string('title');
 	    $table->integer('contentid');
 	    $table->integer('contenttypeid');
+	    $table->string('xmap');
+	    $table->string('ymap');
             $table->timestamps();
         });
     }

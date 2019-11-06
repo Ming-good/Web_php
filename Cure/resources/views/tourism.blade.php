@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-	<script src="assets/js/jquery-3.4.1.min.js"></script>
-	<script src="assets/js/page/jquery.twbsPagination.min.js"></script>
-	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=db316ffdfc1b88f64685de057f89dc94"></script>
-        <title>Laravel</title>
-	<link rel="stylesheet" href="assets/css/main.css" />
-    </head>
-    <body>
+@extends('layout/layout')
+@section('content')
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=db316ffdfc1b88f64685de057f89dc94"></script>
 <div class='container'>
     <div style="width:1200px;height:800px;">
 	<form>
@@ -42,13 +31,18 @@
 	   </div>
 	</div>
 
-	<div style="height:800px;width:250px;position:absolute;left:50%;margin-left:450px;">
-	  <h2 style='text-align:center;width:200px;'>바구니</h2>
-	    <div id ='basket' style='width:200px;'></div>
+	<div id='basket_wrap' style="height:800px;width:250px;position:absolute;left:50%;top:0;margin-left:450px;">
+	  <h2 style='color:#80b85c;text-align:center;width:200px;'>여행 바구니</h2>
+	    <div id ='basket' style='width:200px;'>
+		@foreach($tourBasket as $row)
+		<div style='width:200px;border-bottom:1px solid #5cb85c;padding:5px 20px 15px 5px;'>
+		    <button name='del' style='position:relative;right:-165px;margin-bottom:5px;width:10px;text-align:center;height:15px;padding:0px 14px 20px 5px;' type='button' class='btn btn-success' value='{{$row ->contentid}}'>X</button>
+		    <div style='width:200px;height:20px;color:#5cb85c;font-weight:bold;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;'>{{$row -> title}}</div>
+	        </div>
+		@endforeach
+	    </div>
 	    <div>
-    	        <nav aria-label="Page navigation">
-         	    <ul class="pagination" id="pagination"></ul>
-    	        </nav>
+		<a style="text-decoration:none;width:150px;text-align:center;" class='btn2 green' href='#'>다음</a>
 	    </div>
 	</div>
 	
@@ -62,10 +56,6 @@
 </div>
 <br>
 
-
-
-    </body>
-</html>
 <script>
 $('document').ready(function(){
 $.ajaxSetup({
@@ -73,36 +63,15 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-    //페이지네이션
-    $(function () {
-	var totalData = {{$totalPage}};
-	var totalPage = Math.ceil(totalData/8);
-	var visiblePage = Math.ceil(totalPage/3);
-        window.pagObj = $('#pagination').twbsPagination({
-            totalPages: totalPage,
-            visiblePages: 5,
-	    prev: "이전",
-   	    next: "다음",
-   	    first: '',
-   	    last: '',
-            onPageClick: function (event, page) {
-		    $.ajax({
-		        url:'basket/page',
-			type:'get',
-			data:{"page":page},
-			success:function(data){
-				var arr = JSON.parse(data);
-				$("#basket").empty();
-				for(var i in arr) {
-var str = "<div style='width:200px;border-bottom:1px solid #5cb85c;padding:5px 20px 15px 5px;'><button name='del' style='position:relative;right:-165px;margin-bottom:5px;width:10px;text-align:center;height:15px;padding:0px 14px 20px 5px;' type='button' class='btn btn-success' value='"+arr[i].contentid+"'>X</button><div style='color:#5cb85c;font-weight:bold;'>"+arr[i].title+"</div></div>";
-			        $("#basket").append(str);
-				}
 
-			}
-	    	    });
-            }
-        })
-    });
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+var map = new kakao.maps.Map(mapContainer, mapOption);
 
 
 	$('#basket').on("click", "button[name=del]", function(){
@@ -122,10 +91,14 @@ var str = "<div style='width:200px;border-bottom:1px solid #5cb85c;padding:5px 2
 	$("#search").click(function(){
 	    var radioId = $("input:radio[name=area]:checked").attr("id");
 	    var areaName = $("label[for='"+radioId+"']").text();
+	    var area = $("input:radio[name=area]:checked").val();
+	    var sigunguCode = $("#sigunguCode").val();
+	    var cat1 = $("#cat1").val();
+	    var cat2 = $("#cat2").val();
 	    $.ajax({
 	        url:"tourism/map",
 	        type:"get",
-	        data:$('form').serialize()+"&areaName="+areaName,
+	        data:{"area":area, "areaName":areaName, "sigunguCode":sigunguCode, "cat1":cat1, "cat2":cat2},
 	        success:function(data){
 			$("#map").empty();
 			var obj = JSON.parse(data);
@@ -181,18 +154,19 @@ var str = "<div style='width:200px;border-bottom:1px solid #5cb85c;padding:5px 2
 					el.onmouseout = function(){
 					    infowindow.close();
 					};
-					$(el).children("button[name=baguny]").click(function(){
+					$(el).on("click", "button[name=baguny]", function(){
 					    $.ajax({
 						url:'basket/resource',
 						type:'post',
-						data:{"contentid":item.contentid, "contenttypeid":item.contenttypeid,"title":item.title},
+						data:{"ymap":item.mapy, "xmap":item.mapx, "contentid":item.contentid, "contenttypeid":item.contenttypeid,"title":item.title},
 						success:function(data){
-							if(data != 'false') {
-var str = "<div style='width:200px;border-bottom:1px solid #5cb85c;padding:5px 20px 15px 5px;'><button name='del' style='position:relative;right:-165px;margin-bottom:5px;width:10px;text-align:center;height:15px;padding:0px 14px 20px 5px;' type='button' class='btn btn-success' value='"+item.contentid+"'>X</button><div style='color:#5cb85c;font-weight:bold;'>"+item.title+"</div></div>";
+							if(data == 'false') {
+							    alert('이미 존재하는 정보 입니다');
+							} else if(data == 'limit') {
+							    alert('바구니가 가득찼습니다.');
+							} else {
+var str = "<div style='width:200px;border-bottom:1px solid #5cb85c;padding:5px 20px 15px 5px;'><button name='del' style='position:relative;right:-165px;margin-bottom:5px;width:10px;text-align:center;height:15px;padding:0px 14px 20px 5px;' type='button' class='btn btn-success' value='"+item.contentid+"'>X</button><div style='width:200px;height:20px;color:#5cb85c;font-weight:bold;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;'>"+item.title+"</div></div>";
 							    $("#basket").append(str);
-				alert($("#basket").children().length);
-							} else{
-							    alert('이미 존재하는 데이터 입니다');
 							}
 							
 						}	
@@ -369,4 +343,5 @@ function makeOutListener(infowindow) {
     };
 }
 </script>
+@stop
 
