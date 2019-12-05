@@ -1,0 +1,424 @@
+@media screen and (max-width:920px) {
+  .TB_image img{
+    width:300px;
+    height:300px;
+  }
+  div.TB_content{
+    width:450px;
+    height:150px;
+    font-size: 17px;
+  }
+  button.nextPage{
+    font-size:50px;
+    width:400px;
+    height:190px;
+  }
+}
+@media screen and (max-width:870px) {
+  div.TB_content{
+    top:0px;
+  }
+}
+@media screen and (max-width:860px) { /* 상단 바 버튼 변경*/
+  button.barbutton{
+    width: auto;
+    font-size: 12px;
+  }
+  a.ri{
+    font-size: 0.9em;
+    width:auto;
+  }
+}
+@media screen and (max-width:750px) {
+  .TB_image img{
+    width:300px;
+    height:300px;
+    margin-left:60px;
+  }
+  img.one_img{
+    left:0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-left:20px;
+  }
+  .menu_left_ul{
+    width:150px;
+    padding: 0px;
+    margin: 0px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .menu_right_ul{
+    text-align: left;
+    width:150px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  a.ri{
+    border:0px;
+  }
+  .nav_list{display:none;}
+  div.onetop{
+    text-align: center;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  img.toggle{
+    display:block;
+  }
+  ul.menu_left_ul{
+    float:none;
+    background-color: #5cb85c;
+  }
+}
+@media all and (min-width:751px) {
+  .nav_list1 ul{
+    display:none;
+  }
+}
+@media all and (max-width:500px) {  /* 모바일 용 */
+  .TB_image img{
+    width:200px;
+    height:200px;
+    margin-left:0px;
+    left:50%;
+  }
+  div.center{
+    height:400px;
+  }
+  button.nextPage{
+    width:250px;
+    font-size:20px;
+    height:100px;
+    padding-top:37px;
+  }
+  div.TB_content{
+      width: 250px;
+    font-size:10px;
+  }
+  /*  회원가입 */
+  form.modal_login{
+    width:300px;
+  }
+
+  input.modal_input{
+    width:300px;
+  }
+  input.sign_submit{
+    width:50px;
+    height: 25px;
+    float:left;
+    position:relative;
+    left:30px;
+  }
+
+/*   index 화면에서 로그인 누를 때 */
+  h1.title{
+    text-align: center;
+  }
+  .modal_login input{
+    margin-left:20px;
+    font-size: 10px;
+  }
+  div.modal-content{
+    width:300px;
+  }
+  input.modal_input{
+    width:230px;
+  }
+}
+/* Android 버그 교정 */
+body {
+  -webkit-animation: bugfix infinite 1s;
+}
+@-webkit-keyframes bugfix {
+  from { padding: 0; }
+  to { padding: 0; }
+}
+/*          index. 속성         */
+.nav_list1{
+    display: none;
+    background: #5cb85c;
+    position: fixed;
+    width: 100%;
+    top: 60px;
+    z-index: 3;
+}
+.label_image{
+  background-image: url('menu.png');
+  background-repeat: no-repeat;
+  background-position:97% 10px;
+  background-size: 24px 19px;
+}
+
+.toggle{
+cursor:pointer;
+  display:none;
+  position:relative;
+  float:right;
+}
+.one_img{
+  margin-right:30px;
+  padding-top:5px;
+  position:relative;
+  left:-10px;
+}
+.menu_left_ul{
+  list-style:none;
+  position: relative;
+  bottom:45px;
+  left:70px;
+}
+.menu_left_li{
+  float: left;
+}
+.menu_right_ul{
+  list-style:none;
+  position: relative;
+  bottom:45px;
+}
+.menu_right_li{
+  float: right;
+}
+.center{
+  margin-top:69px;
+  text-align:center;
+  color:#000;
+  height:500px;
+}
+.span_color{
+  border-radius:5px;
+  padding-right:5px;
+  padding-left:5px;
+  font-size:25px;
+  background-color:#5cb85c;
+  color:#fff;
+}
+.plan{
+  text-decoration:none;
+  font-size:20px;
+  color:#fff;
+  position:fixed;
+  top:17px;
+  left:250px;
+}
+.event{
+  text-decoration:none;
+  font-size:20px;
+  color:#fff;
+  position:fixed;
+  top:17px;
+  left:450px;
+}
+.onetop{
+  z-index:3; /*화면 순서*/
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  padding-right:30px;
+  margin : 0px;
+  color:white;
+  background-color : #5cb85c;
+  width:100%;
+  height: 60px;
+  position: fixed;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  top:0%; left:0%;
+}
+.ri{
+  margin:0px;
+  background-color: inherit;
+  color:white;
+  font-size:1em;
+  padding:5px 20px;
+  margin-right:20px;
+  cursor: pointer;
+  display: inline-block;
+  border: 3px solid;
+  border-radius: 5px;
+}
+.nextPage{
+  text-align:center;
+  font-size:100px;
+  padding: 45px 30px 45px 30px;
+  border-radius: 10px;
+  cursor:pointer;
+}
+.TB_content{
+  display: inline-block;
+  width:500px;
+  font-size:20px;
+  position:relative;
+  top:100px;
+}
+.footer{
+  background-color:#212529;
+  height:120px;
+  width:300px;
+  width:100%;
+  position:relative;
+  color:snow;
+  padding:1%;
+  font-size:17px;
+  font-family: 'nanum';
+}
+
+.button:hover {color: red;}
+.button1:hover {color: red;}
+/*          trip          button         */
+
+.tbutton {
+  background: none;
+  border: 3px solid #fff;
+  color: #fff;
+  display: block;
+  font-weight: bold; /*굵은 굵기 숫자700과 같다.*/
+  margin: 1em auto;
+  position: relative;
+  text-transform: uppercase; /*모든 글자 대문자로*/
+  cursor: pointer;
+}
+
+.tbutton::before,
+.tbutton::after { /*0.3초동안 변환*/
+  -webkit-transition: all 0.3s; /*webkit 계열*/
+	-moz-transition: all 0.3s;/*파이어폭스 계열*/
+  -o-transition: all 0.3s;/*오페라 계열*/
+	transition: all 0.3s;
+  background: #fff;
+  content: '';
+  position: absolute;
+  z-index: -1; /*우선순위*/
+  color: #5ecc71;
+}
+
+.tripbutton:hover {  /*마우스가 위에 있을 떄 글자 색상*/
+  color: #5ecc71;
+}
+
+.tripbutton::before {  /*맨 처음 화면*/
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.tripbutton::after { /*마우스가 위에 있을 떄 크기 화면*/
+  background: #2ecc71;
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.tripbutton:hover:after {  /* 효과가 가운데로 위치한다.*/
+  height: 0;
+  left: 50%;
+  top: 50%;
+  width: 0;
+}
+/* 상단 바 버튼 형식*/
+.barbutton{
+  margin: 0px;
+  display:inline;
+  height:40px;
+  border: 0;
+  font-size: 17px;
+  margin-right:20px;
+}
+.barbutton::after {
+  height: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  border-radius: 5px 5px 18px 18px;
+}
+
+.barbutton:hover:after {
+  height: 100%;
+}
+.barbutton:hover{
+  color: #5ecc71;
+}
+/*    여기가  회원   가입  또는   로그인 관련 내용 이다.*/
+.modal_label {
+    display: block;
+    margin-top: 20px;
+    letter-spacing: 2px;
+}
+.modal_login {
+    margin: 0 auto;
+    width: 459px;
+}
+.modal_input{
+    width: 439px;
+    height: 27px;
+    background-color: #efefef;
+    border-radius: 6px;
+    border: 1px solid #dedede;
+    padding: 10px;
+    margin-top: 3px;
+    font-size: 0.9em;
+    color: #3a3a3a;
+}
+.modal_input:focus{
+   border: 1px solid #97d6eb;
+}
+.sign_submit{
+    width: 127px;
+    height: 48px;
+    text-align: center;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color:#dddddd;
+}
+.sign_submit:hover{
+    color: #fff;
+    background-color: #216282;
+    opacity: 0.9;
+}
+.modal1 {
+     position: fixed;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.5);
+     opacity: 0;
+     visibility: hidden;
+     transform: scale(1.1);
+     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+     z-index:3;
+ }
+ .modal-content {
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     background-color: white;
+     padding: 1rem 1.5rem;
+     width: 500px;
+     height: 350px;
+     border-radius: 0.5rem;
+ }
+ .close-button {
+     float: right;
+     width: 1.5rem;
+     line-height: 1.5rem;
+     text-align: center;
+     cursor: pointer;
+     border-radius: 0.25rem;
+     background-color: lightgray;
+ }
+ .close-button:hover {
+     background-color: darkgray;
+ }
+ .show-modal {
+     opacity: 1;
+     visibility: visible;
+     transform: scale(1.0);
+     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+ }

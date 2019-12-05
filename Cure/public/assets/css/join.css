@@ -1,0 +1,211 @@
+@media screen and (max-width:1200px){
+	div.con_select{
+	        width:200px;
+		left:0%;
+	}
+	select.selecting{
+		width:200px;
+		padding-left:0px;
+		font-size:15px;
+	}
+	div.infos{
+		width:200px;
+	}
+	span.RBtn {
+		font-size:15px;
+		padding:10px 40px 10px 40px;
+	}
+	a.RBtn {
+                font-size:15px;
+                padding:10px 40px 10px 40px;
+        }
+
+	div.basket_wrap {
+		width:200px;
+		padding:15px 10px 5px 20px;
+	}
+	span.title {
+		width:130px;
+		font-size:13px;
+	}
+	span.addBtn {
+		padding:2px 3px 2px 3px;
+		width:20px;
+	}
+	div.map_style{
+		width:550px;
+		left:0%;
+	}
+	div.join_contain {
+		width:800px;
+	}
+}
+@media screen and (max-width:768px){
+        div.con_select{
+                width:300px;
+		float:none;
+		margin-left:auto;
+		margin-right:auto;
+        }
+        select.selecting{
+                width:300px;
+                padding-left:17px;
+                font-size:17px;
+        }
+        div.infos{
+                width:300px;
+                height:600px;
+        }
+        span.RBtn {
+                font-size:17px;
+        }
+        a.RBtn {
+                font-size:17px;
+                padding:10px 40px 10px 40px;
+        }
+
+        div.basket_wrap {
+                width:300px;
+		height:42px;
+                padding:10px 5px 10px 10px;
+        }
+        span.title {
+                width:240px;
+                font-size:15px;
+        }
+        span.addBtn {
+                padding:2px 3px 2px 3px;
+                width:20px;
+        }
+        div.map_style{
+                width:300px;
+		height:600px;
+		margin-left:auto;
+                margin-right:auto;
+
+        }
+	div.join_contain {
+                width:320px;
+        }
+}
+.join_contain {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.map_style{
+	width:700px;
+	height:800px;
+	left:20%;
+}
+.con_select{
+	width:400px;
+	float:left;
+	position:relative;
+	left:20%;
+}
+
+.dotOverlay {
+	position:relative;
+	bottom:18px;
+	border-radius:6px;
+	border: 1px solid #ccc;
+	border-bottom:2px solid #ddd;
+	float:left;
+	font-size:12px;
+	padding:5px;
+	background:#fff;
+}
+.dotOverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
+.dotOverlay:after {
+	content:'';
+	position:absolute;
+	margin-left:-6px;
+	left:50%;
+	bottom:-8px;
+	width:11px;
+	height:8px;
+	background:url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png')
+}
+
+.dot:hover {
+cursor:pointer;
+}
+.dot {
+border-radius:50%;
+padding-top:2px;
+background-color:#fff;
+width:30px;
+height:30px;
+text-align:center;
+}
+
+.dot.red {
+border:3px solid red;
+}
+
+.dot.blue {
+border:3px solid blue;
+}
+
+.dot span {
+font-weight:bold;
+}
+
+.selecting {
+    width:400px;
+    height:50px;
+    padding-left:17px;
+    font-size:18px;
+    font-weight:bold;
+    background-color:#5cb85c;
+    color:#fff;
+    text-align:center;
+    
+}
+
+.infos {
+    width:400px;
+    height:750px;
+    border:1px solid #5cb85c;
+}
+
+.basket_wrap {
+    width:400px;
+    height:50px;
+    padding:15px 10px 5px 20px;
+}
+
+.title {
+    width:300px;
+    height:30px;
+    font-size:15px;
+    font-weight:bold;
+    float:left;
+}
+
+.addBtn:hover {
+    cursor:pointer;
+}
+
+.addBtn {
+    border:1px solid #ddecca;
+    padding:8px 15px 8px 15px;
+    width:50px;
+    height:30px;
+}
+.RBtn:hover {
+cursor:pointer;
+color:#fff;
+}
+
+.RBtn {
+    font-size:20px;
+    padding:20px 80px 20px 80px;
+    color:#fff;
+    background-color:#ff9e9e;
+    border-radius: 10px;
+}
+
+

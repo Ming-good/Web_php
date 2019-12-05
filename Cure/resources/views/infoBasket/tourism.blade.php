@@ -1,58 +1,59 @@
 @extends('layout/layout')
 @section('content')
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=db316ffdfc1b88f64685de057f89dc94"></script>
-<div class='container'>
-    <div style="width:1200px;height:800px;">
+<link rel="stylesheet" href="assets/css/tour.css" />
+<link rel="stylesheet" href="assets/css/main.css" />
+
+<div class='container' style='margin-top:100px;'>
+    <div class="tour_Wrap">
 	<form>
-	    <div style="float:left;width:200px;border-right:1px solid #e3e3e3;margin-top:60px;">
+	    <div class="sigungu">
+	        <select id="area" name="area" class="select">
+		    <option value="0">지역 선택</option>
 	  @foreach($item as $row) 
-		<div class="checks" style="margin-bottom:15px;">
-                      <input type="radio" id="area{{$row -> code}}" name="area" value="{{$row -> code}}">
-                      <label for="area{{$row -> code}}">{{$row -> name}}</label>
-                </div>
+		    <option value="{{$row -> code}}">{{$row -> name}}</option>
 	  @endforeach
-	    </div>
-	    <div style="float:left;width:800px;margin-left:20px;">
-	        <select id="sigunguCode" name="sigunguCode" style="float:left;">
-		    <option value="0">시/군/구 선택</option>;
+	        </select>
+	        <select id="sigunguCode" name="sigunguCode" class="select">
+		    <option value="0">시/군/구 선택</option>
 	        </select>
 
-	        <select id="cat1" name="cat1" style="float:left;">
-		    <option value="0">중분류 선택</option>;
+	        <select id="cat1" name="cat1" class="select">
+		    <option value="0">중분류 선택</option>
 		</select>
-	        <select id="cat2" name="cat2" style="float:left;">
-		    <option value="0">소분류 선택</option>;
+	        <select id="cat2" name="cat2" class="select">
+		    <option value="0">소분류 선택</option>
 		</select>
-		<button type="button" id='search' style="margin-left:20px;">Search !</button>
+		<button type="button" class='button4' id='search' style="">Search !</button>
 	    </div>
 	</form>
-	<div id='content' style="float:left;width:800px;margin-left:20px;padding-top:20px;">
-	   <div id="map" style="width:750px;height:700px;">
+	<div id='content' class="content_Wrap">
+	   <div id="map" class="maps">
 	   </div>
 	</div>
 
-	<div id='basket_wrap' style="height:800px;width:250px;position:absolute;left:50%;top:0;margin-left:450px;">
-	  <h2 style='color:#80b85c;text-align:center;width:200px;'>여행 바구니</h2>
-	    <div id ='basket' style='width:200px;'>
+	<div id='basket_wrap' class="basket_Wrap">
+	  <h2 class='basket'>여행 바구니</h2>
+	    <div id ='basket'>
 		@foreach($tourBasket as $row)
-		<div style='width:200px;border-bottom:1px solid #5cb85c;padding:5px 20px 15px 5px;'>
-		    <button name='del' style='position:relative;right:-165px;margin-bottom:5px;width:10px;text-align:center;height:15px;padding:0px 14px 20px 5px;' type='button' class='btn btn-success' value='{{$row ->contentid}}'>X</button>
-		    <div style='width:200px;height:20px;color:#5cb85c;font-weight:bold;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;'>{{$row -> title}}</div>
+		<div class='basket_content'>
+		    <button name='del' type='button' class='button2' value='{{$row ->contentid}}'>X</button>
+		    <div class='basket_title'>{{$row -> title}}</div>
 	        </div>
 		@endforeach
 	    </div>
 	    <div>
-		<a style="text-decoration:none;width:150px;text-align:center;" class='btn2 green' href='#'>다음</a>
+		<a style="text-decoration:none;width:150px;text-align:center;" class='btn2 green' href='/Cure/public/rooms'>다음</a>
 	    </div>
 	</div>
 	
     </div>
     <div style="width:1300px;text-align:right;">
     </div>
-    <div id='detail' style="width:1200px;text-align:center;">
+    <div id='detail' class="detail">
     </div>
 
-    <a style="display:scroll;position:fixed;bottom:120px;right:50px;text-decoration: none;" href="#" title="맨 위로"><img src='assets/image/top.gif'  /><div style='text-align:center;color:#000000'>위로</div></a>
+    <a class="moving_top" href="#" title="맨 위로"><img src='assets/image/top.gif'  /><div style='text-align:center;color:#000000'>위로</div></a>
 </div>
 <br>
 
@@ -89,17 +90,17 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 
 
 	$("#search").click(function(){
-	    var radioId = $("input:radio[name=area]:checked").attr("id");
-	    var areaName = $("label[for='"+radioId+"']").text();
-	    var area = $("input:radio[name=area]:checked").val();
+	    var areaName = $("#area option:checked").text();
+	    var area = $("#area").val();
 	    var sigunguCode = $("#sigunguCode").val();
 	    var cat1 = $("#cat1").val();
 	    var cat2 = $("#cat2").val();
-	    $.ajax({
-	        url:"tourism/map",
-	        type:"get",
-	        data:{"area":area, "areaName":areaName, "sigunguCode":sigunguCode, "cat1":cat1, "cat2":cat2},
-	        success:function(data){
+	    if(area != 0) {
+	        $.ajax({
+	            url:"tourism/map",
+	            type:"get",
+	            data:{"area":area, "areaName":areaName, "sigunguCode":sigunguCode, "cat1":cat1, "cat2":cat2},
+	            success:function(data){
 			$("#map").empty();
 			var obj = JSON.parse(data);
 			var item = obj.event.response.body.items.item;
@@ -111,12 +112,12 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
         			level: 10 // 지도의 확대 레벨
     			};
 			var map = new kakao.maps.Map(mapContainer, mapOption);
-			$("#map").append("<div class='map_wrap' id ='map_wrap'><ul id='placesList'></ul></div>");
+			$("#content").append("<div class='map_wrap' id ='map_wrap'><ul id='placesList'></ul></div>");
 
 			var positions = [];
 			var content;
 			for(var i in item) {
-				content = "<div style='width:230px;text-align:center;'><img onerror='this.style.display='none'' alt='' src='"+item[i].firstimage+"' style='width:200px;height:200px'/><div style='font-weight:bold;font-size:13px;width:230px;'>[ 제목 ]<br>"+item[i].title+"</div><div style='font-weight:bold;font-size:13px;width:230px;'>[ 주소 ]<br>"+item[i].addr1+"</div></div>";	
+				content = "<div class='overlay_wrap'><img onerror='this.style.display='none'' alt='' src='"+item[i].firstimage+"' class='overlay_image'/><div class='overlay_title'>[ 제목 ]<br>"+item[i].title+"</div><div class='overlay_addr'>[ 주소 ]<br>"+item[i].addr1+"</div></div>";	
 				positions.push({content: content,latlng: new kakao.maps.LatLng(item[i].mapy, item[i].mapx)});	
 			}
 			for (var i = 0; i < positions.length; i ++) {
@@ -136,7 +137,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 			        var el = document.createElement('li');
 			    	el.className = 'item';
 				el.id = 'el'+i;
-			    	var title = "<div style='width:60px;float:left;font-weight:bold;font-size:14px;padding-left:10px;margin-top:10px;'>["+i+"]</div><button name='detail' type='button' class='btn btn-primary' style='width:80px;height:30px;float:left;margin-top:10px;margin-right:10px;'>상세정보</button><button name='baguny' type='button' class='btn btn-primary' style='width:40px;height:30px;float:left;margin-top:10px;'>담기</button></div><h5 style='width:200px;font-weight:bold;padding:10px 10px 5px 10px;'>"+item[i].title+"</h5>";
+			    	var title = "<div style='width:60px;float:left;font-weight:bold;font-size:14px;padding-left:10px;margin-top:10px;'>["+i+"]</div><button name='detail' type='button' class='btn btn-primary' style='width:80px;height:30px;float:left;margin-top:10px;margin-right:10px;'>상세정보</button><button name='baguny' type='button' class='btn btn-primary' style='width:40px;height:30px;float:left;margin-top:10px;'>담기</button></div><h5 style='padding:10px 10px 5px 10px;' class='map_title'>"+item[i].title+"</h5>";
 
 				var arr = "<div class='info'>"+item[i].addr1+"</div>";
 				el.innerHTML = title+arr;
@@ -165,7 +166,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 							} else if(data == 'limit') {
 							    alert('바구니가 가득찼습니다.');
 							} else {
-var str = "<div style='width:200px;border-bottom:1px solid #5cb85c;padding:5px 20px 15px 5px;'><button name='del' style='position:relative;right:-165px;margin-bottom:5px;width:10px;text-align:center;height:15px;padding:0px 14px 20px 5px;' type='button' class='btn btn-success' value='"+item.contentid+"'>X</button><div style='width:200px;height:20px;color:#5cb85c;font-weight:bold;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;'>"+item.title+"</div></div>";
+var str = "<div class='basket_content'><button name='del'  type='button' class='button2' value='"+item.contentid+"'>X</button><div class='basket_title'>"+item.title+"</div></div>";
 							    $("#basket").append(str);
 							}
 							
@@ -226,7 +227,7 @@ var str = "<div style='width:200px;border-bottom:1px solid #5cb85c;padding:5px 2
 							}
 
 
-							var title = "<h2 style='margin-bottom:0;padding:20px;background-color:#5fcec0;color:#fff;font-weight:bold'>"+subIntro.title+"</h2>";
+							var title = "<h2 class='info_title'>"+subIntro.title+"</h2>";
 
 							var content = "<div id='contInfom' class='strStart'><p style='margin-top:30px;'><strong>|</strong> 상세정보</p></div>";
 
@@ -241,7 +242,7 @@ var str = "<div style='width:200px;border-bottom:1px solid #5cb85c;padding:5px 2
 
 							for(var i in image) {
 
-							    view = view + "<img style='width:500px;height:500px;' src='"+image[i].originimgurl+"'/>";
+							    view = view + "<img class='info_img' src='"+image[i].originimgurl+"'/>";
 
 							}
 
@@ -270,8 +271,11 @@ var str = "<div style='width:200px;border-bottom:1px solid #5cb85c;padding:5px 2
 			}
 	        }
 	    })
+	    }else {
+		    alert('지역을 선택해주십시오');
+	    }
 	})
-	$("input:radio[name='area']").change(function(){
+	$("#area").change(function(){
 		$("#cat1").empty();
 		var option = "<option value='0'>중분류 선택</option>";
 		$("#cat1").append(option);
@@ -311,9 +315,9 @@ var str = "<div style='width:200px;border-bottom:1px solid #5cb85c;padding:5px 2
 	})
 
 
-	$("input:radio[name='area']").click(function(){
+	$("#area").change(function(){
 		var arr = [];
-		if($(this).is(":checked")){
+		if($(this).val() != 0){
 		    $.ajax({
 			url:"tourism/area",
 			type:"get",

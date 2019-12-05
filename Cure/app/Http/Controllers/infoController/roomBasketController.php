@@ -1,20 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\infoController;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\room;
 
 
 class roomBasketController extends Controller
 {
-	public function index()
-	{
-		$room = new room;
-		$room -> title -> get();
 
-		echo $room;	
+	#해당 숙소의 정보를 가져옵니다.
+	public function getID()
+	{
+		$userID = session() -> get('id');
+
+		$roomID = $_GET['roomID'];
+		$room = new room;
+		$roomData = $room -> where([
+				['userID', $userID],
+				['room_id', $roomID],
+			]) -> first();
+		echo json_encode($roomData);
 	}
 
 	#숙박업소 정보를 저장합니다
@@ -28,15 +35,20 @@ class roomBasketController extends Controller
 		$url = $request -> input('url');
 		$xmap = $request -> input('xmap');
 		$ymap = $request -> input('ymap');
-
+		
+		$userID = session() -> get('id');
 		
 		$room = new room;
-		$count = $room -> where('userID', 'read1516') -> count();
-		$result = $room -> where('room_id', $id) -> first();
+		$count = $room -> where('userID', $userID) -> count();
+		$result = $room -> where([
+			['room_id', $id],
+			['userID', $userID],
+		]) -> first();
+
 		if($count < 10 && $result == NULL) {
 		    $room -> room_id = $id;
 		    $room -> title = $title;
-		    $room -> userID = 'read1516';
+		    $room -> userID = $userID;
 		    $room -> road_addr = $road_addr;
 		    $room -> addr = $addr;
 		    $room -> tel = $tel;
@@ -53,6 +65,19 @@ class roomBasketController extends Controller
 		}
 
 		echo $result;
+
+	}
+
+	#숙소 정보를 삭제합니다
+	public function destroy(Request $request)
+	{
+		$room_id = $request -> input('room_id');
+		$userID = session() -> get('id');
+		$room = new room;
+		$room -> where([['userID', $userID],
+				['room_id', $room_id],
+			]) -> delete();
+
 
 	}
 }

@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\infoController;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\basket;
 
 class tourBasketController extends Controller
 {
 
+	#여행지 정보를 저장합니다
 	public function store(Request $request)
 	{
 		$title = $request -> input('title');
@@ -17,11 +18,17 @@ class tourBasketController extends Controller
 		$xmap = $request -> input('xmap');
 		$ymap = $request -> input('ymap');
 
+		$userID = session() -> get('id');
+
 		$basket = new basket;
-		$count = $basket -> where('userID', 'read1516') -> count();
-		$result = $basket -> where('contentid', $contentid) -> first();
+		$count = $basket -> where('userID', $userID) -> count();
+		$result = $basket -> where([
+			['contentid', $contentid],
+			['userID', $userID],
+		]) -> first();
+
 		if($count<10 && $result == NULL) {
-			$basket -> userID = 'read1516';
+			$basket -> userID = $userID;
 			$basket -> title = $title;
 			$basket -> contentid = $contentid;
 			$basket -> contenttypeid = $contenttypeid;
@@ -40,10 +47,17 @@ class tourBasketController extends Controller
 		echo $result;
 
 	}
-	public function delete(Request $request)
+	#여행지 정보를 삭제합니다
+	public function destroy(Request $request)
 	{
+		$contentid = $request -> input('contentid');
+		$userID = session() -> get('id');
+
 		$basket = new basket;
-		$basket -> where('contentid', $request -> input('contentid')) -> delete();
+		$basket -> where([
+			['contentid', $contentid],
+			['userID', $userID],
+		]) -> delete();
 
 	}
 

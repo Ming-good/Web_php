@@ -1,11 +1,13 @@
 @extends('layout/layout')
 @section('content')
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=db316ffdfc1b88f64685de057f89dc94"></script>
+<link rel="stylesheet" href="assets/css/rooms.css" />
+<link rel="stylesheet" href="assets/css/main.css" />
 
-<div class='container' style='width:1550px'>
+<div class='contain contain_wh'>
     <div class='room_wrap'>
 	<div style='text-align:center;'>
-	    <h2 style='color:#fff;background-color:#5cb85c;margin:0px;padding:30px;'>여행 정보</h2>
+	    <h2 class="tour_info" >여행 정보</h2>
 	    <div id='tour'>
 		<ul style='padding:0;list-style:none;'>
 		@foreach($tourBasket as $row)
@@ -15,18 +17,21 @@
 	    </div>
 	</div>
     </div>
-    <div id='test' style='width:800px;float:left;'>
-       <div id="map" style="width:100%;height:850px;"></div>
+    <div id='test' class="map_css">
+       <div id="map" class="map_css2"></div>
     </div>
-    <div style='text-align:center;width:300px;float:left;'>
-	<h2 style='color:#fff;background-color:#5cb85c;margin:0px;padding:30px;'>숙소 바구니</h2>
-	<div id='basket'>
-	    <ul style='padding:0;list-style:none;'>
+    <div class="rooms_info">
+	<h2 class="rooms_info_head">숙소 바구니</h2>
+	<div id='basket' class="rooms_info_box">
+	    <ul class="rooms_ul">
 		@foreach($roomBasket as $row)
-		<li>{{$row -> title}}</li>
+		<li data-id="{{$row['room_id']}}" class='room_basket'><p id='title'>{{$row -> title}}</p><span class='X_button'>X</span></li>
 		@endforeach
 	    </ul>
 	</div>
+	<div id='intro' class="basket_intro">
+	</div>
+	<a href="join/enrollment" class='btn2 green basket_button' href='/Cure/public/join/enrollment'>다음</a>
     </div> 
 </div>
 <script>
@@ -37,6 +42,45 @@ $.ajaxSetup({
     }
 });
 
+
+
+//숙소 바구니 정보 보기
+$("#basket").on("click", "p", function(){
+	var li = $(this).closest('li');
+	var room_id = li.data('id');
+	$.ajax({
+		url:"/Cure/public/roomBasket/roomInfo",
+		type:"get",
+		data:{"roomID":room_id},
+		success:function(data){
+			$("#intro").empty();
+			var obj = JSON.parse(data);
+
+			var title = "<div class='room_title'>"+obj.title+"</div>";
+			var road_addr = (obj.road_addr == null) ? "없음" : "<div class='room_road'>"+obj.road_addr+"</div>";
+			var addr = (obj.addr == null) ? "" : "<div class='room_addr'>"+obj.addr+"</div>";
+			var tel = (obj.tel == null) ? "" : "<div class='room_tel'>"+obj.tel+"</div>";
+			var url = (obj.url == null) ? "" : "<a class='room_url' href='"+obj.url+"'>홈페이지</a>";
+
+			var content = title + road_addr + addr + tel + url;
+			$("#intro").append(content);
+		}
+	})
+});
+
+//숙소 바구니 정보 삭제
+$("#basket").on("click", ".X_button", function(){
+	var li = $(this).closest('li');
+	var room_id = li.data('id');
+	$.ajax({
+	    url:"roomBasket/destroy",
+	    type:"post",
+	    data:{"room_id":room_id},
+	    success:function(data){
+		    li.closest('li').remove();
+	    }
+	});
+});
 
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -155,7 +199,7 @@ $('#tour').on('click', 'a', function(e){
 			} else if(data == 'limit') {
 				alert('바구니가 가득찼습니다.');
 			} else {
-				$("#basket ul").append("<li>"+roomTitle+"</li>");
+				$("#basket ul").append("<li data-id='"+id+"' class='room_basket'><p>"+roomTitle+"</p><span class='X_button'>X</span></li></li>");
 				
 			}	
 		}

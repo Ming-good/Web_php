@@ -1,0 +1,108 @@
+@media screen and (max-width: 2000px)
+{
+.festival_wrap {
+    width: 1450px;
+    height: 800px;
+    }
+.map_Wrap{
+    width:600px;
+    height:800px;
+    float:left;
+    margin-right: 10px;
+}
+.map_size{
+    width:600px;
+    height:700px;
+    margin-top:100px;
+}
+#map_table {
+    width: 225px;
+    float: left;
+    margin-top: 100px;
+    margin-right: 10px;
+    }
+.choice_Wrap {
+    width:340px;
+    height:800px;
+    float:left;
+    text-align: left;
+}
+.map_table {
+    height:700px;
+}
+}
+@media screen and (max-width: 1650px)
+{
+
+
+}
+@media screen and (max-width: 1400px)
+{
+}
+@media screen and (max-width: 765px)
+{
+	.map_Wrap {
+	    width:300px;
+	    height:300px;
+	    float:none;
+	}
+	.map_size{
+	    width:300px;
+	    height:300px;
+	    margin-top:0px;
+	}
+	.festival_wrap {
+	    width:340px;
+	    height:2000px;
+    	    position: relative;
+    	    left: 50%;
+    	    margin-left: -150px;
+	}
+	#map_table{
+	    width:300px;
+    	    float:none;
+	    margin-top:0px;
+	}
+	.choice_Wrap {
+	    float:none;
+	    height:650px;
+	}
+        .map_table {
+          height:300px;
+        }
+}
+
+.festival_wrap {
+    text-align: center;
+}
+
+
+
+.map_table, .map_table *
+{
+margin:0;
+padding:0;
+font-family:'Malgun Gothic',dotum,'돋움',sans-serif;
+font-size:12px;
+}
+.map_table a, .map_table a:hover, .map_table a:active
+{
+color:#000;
+text-decoration: none;
+}
+.map_table {
+position:relative;
+width:100%;
+}
+
+
+#map_table {
+    padding: 5px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 1;
+    font-size: 12px;
+    border-radius: 10px;
+    border: 1px solid #e2e2e2;
+    text-align: left;
+}

@@ -22,10 +22,13 @@ class TravelApi extends Controller
 		$result = json_decode($response);
 		$item = $result -> response -> body -> items -> item;
 
-		$basket = new basket;
-		$tourBasket = $basket -> select('title','contentid') -> where('userID', 'read1516') -> get();
 
-		return view('tourism', compact( 'item', 'tourBasket'));
+		$userID = session() -> get('id');
+
+		$basket = new basket;
+		$tourBasket = $basket -> select('title','contentid') -> where('userID', $userID) -> get();
+
+		return view('infoBasket/tourism', compact( 'item', 'tourBasket'));
 	}
 
 	#해당 도의 시/군/구의 정보를 가져옵니다.	

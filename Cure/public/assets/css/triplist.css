@@ -1,0 +1,132 @@
+@media screen and (max-width:1570px) {
+  div.list_center{
+    height:100%;
+  }
+  table.trip{
+    left:0;
+    margin-top: 100px;
+    float:none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  div.map{
+    width:600px;
+    height:600px;
+    float:none;
+    margin-left: auto;
+    margin-right: auto;
+    right:0%;
+  }
+  button.revise{
+    float:none;
+    right:0;
+    margin-top:70px;
+    top:0px;
+  }
+}
+@media screen and (max-width:500px) {
+    table.trip{
+      width:310px;
+      font-size:10px;
+    }
+    div.map{
+      width:300px;
+      height: 300px;
+    }
+    .block{
+	display:none;
+    }
+}
+.trip th{
+    background-color: #5cb85c;
+    font-size: 1.1em;
+    color: #fff;
+    border-width:2px 0;
+    text-align: center;
+    padding:5px 0px 5px 0px;
+}
+.trip td{
+    background-color: #fff;
+    font-size: 1.2em;
+    color: #000;
+    border-width:2px 0;
+    padding:5px 0px 5px 0px;
+    border-bottom: 1px solid #5cb85c;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+}
+.trip{
+   margin-top:50px ;
+   width:600px;
+   float:left;
+   position: relative;
+   left:10%;
+}
+.map{
+  width:700px;
+  height:700px;
+  position: relative;
+  top:40px;
+  float:right;
+  right:5%;
+  border: 2px solid green;
+}
+.revise{
+  float:right;
+  position:relative;
+  top:94%;
+  right:-500px;
+}
+.list_center{
+  margin-top:69px;
+  text-align: center;
+  height:900px;
+}
+/*   수정   버튼    */
+.revise,
+.revise::after {
+  -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.revise {
+  background: none;
+  border: 3px solid #fff;
+  border-radius: 5px;
+  color: #5cb85c;
+  display: block;
+  font-size: 1.6em;
+  font-weight: bold;
+  margin: 1em auto;
+  padding: 2em 6em;
+  position: relative;
+  text-transform: uppercase;
+  padding: 20px 50px 20px 50px;
+  top:750px;
+}
+
+.revise::before,
+.revise::after {
+  background: #5cb85c;
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+.revise:hover {
+  color: #fff;
+}
+.revise_2::after {
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 0;
+}
+
+.revise_2:hover:after {
+  width: 100%;
+}
