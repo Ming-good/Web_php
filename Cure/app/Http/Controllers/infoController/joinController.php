@@ -71,7 +71,7 @@ class joinController extends Controller
 	{
 		$userID = session() -> get('id');
 		$join = new join;
-		$result = DB::select( DB::raw("SELECT *, (@rank := @rank +1) as rank FROM joins, (SELECT @rank := 0) as b") );
+		$result = DB::select( DB::raw("SELECT *, (@rank := @rank +1) as rank FROM joins, (SELECT @rank := 0) as b WHERE userID ='".$userID."'") );
 		$joinData = json_decode(json_encode($result), True);
 		for($i = 0; $i<count($joinData); $i++) {
 			$split = explode(' ',$joinData[$i]['created_at']);

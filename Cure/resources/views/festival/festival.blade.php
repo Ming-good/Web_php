@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/Cure/public/assets/css/festival.css">
     <div class='container'>
       <div class='festival_wrap'>
+	<div style='margin-top:100px;'><h1 class='search_title'>☞행사정보 검색</h1></div>
 	<div class='choice_Wrap'>
             <div class="calendar" >
                 <div class="month">

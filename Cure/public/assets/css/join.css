@@ -1,4 +1,16 @@
+
+@media screen and (max-width:2000px){
+.search_wrap{
+margin-top:100px;
+margin-bottom:50px;
+position:relative;
+left: 20%;
+}
+}
 @media screen and (max-width:1200px){
+	.search_wrap{
+		left:0;
+	}
 	div.con_select{
 	        width:200px;
 		left:0%;

@@ -1,5 +1,9 @@
 @media screen and (max-width: 2000px)
 {
+.search_title{
+    width:350px;
+}
+
     .contain {
         width: 1430px;
     }
@@ -13,12 +17,22 @@
 
 @media screen and (max-width: 768px)
 {
+.search_title{
+    font-size:30px;
+    width:300px;
+}
     .contain {
         width: 1200px;
     }
     .button4 {
 	width:300px;
     }
+}
+.search_title{
+border-radius:10px;
+color:#fff;
+background-color:#5cb85c;
+padding:20px;
 }
 .contain {
     padding-right: 15px;

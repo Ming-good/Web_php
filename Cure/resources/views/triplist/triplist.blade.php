@@ -29,7 +29,7 @@
       <div class="map" id='map'>
 
       </div>
-      <button class="revise revise_2" type="button" name="button">수정</button>
+      <button id='verify'class="revise revise_2" type="button" name="button">수정</button>
 
     </div>
     <div class='container'>
@@ -45,6 +45,9 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
+$("#verify").on('click', function(){
+	location.href="/Cure/public/join/enrollment";
+})
 
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
@@ -86,7 +89,7 @@ $.ajaxSetup({
 		     $("#detail").empty();
                      var title = "<h2 style='margin-bottom:0;padding:20px;background-color:#5fcec0;color:#fff;font-weight:bold'>"+obj.place_name+"</h2>";
                      var content = "<div id='contInfom' class='strStart'><p style='margin-top:30px;'><strong>|</strong> 상세정보</p></div>";
-                     var detail_inform = "<table class='table table-bordered' style='width:300px;border:none;word-break:break-all;'><tbody><tr><td class='tableTD1'>위치</td'><td style='border:none;' class='tableTD2''>"+obj.address_name+"</td></tr><tr><td class='tableTD1'>전화번호</td'><td style='border:none;' class='tableTD2'>"+obj.phone+"</td></tr><tr><td class='tableTD1'>홈페이지</td><td style='border:none;' class='tableTD2'><a href='"+obj.place_url+"' target='_blank'>"+obj.place_url+"</a></td></tr></tbody></table>";
+                     var detail_inform = "<table class='table table-bordered' style='width:100%;border:none;word-break:break-all;'><tbody><tr><td class='tableTD1'>위치</td'><td style='border:none;' class='tableTD2''>"+obj.address_name+"</td></tr><tr><td class='tableTD1'>전화번호</td'><td style='border:none;' class='tableTD2'>"+obj.phone+"</td></tr><tr><td class='tableTD1'>홈페이지</td><td style='border:none;' class='tableTD2'><a href='"+obj.place_url+"' target='_blank'>"+obj.place_url+"</a></td></tr></tbody></table>";
 
                      $("#detail").append(title);
                      $("#detail").append(content);

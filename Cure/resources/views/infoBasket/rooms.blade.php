@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="assets/css/main.css" />
 
 <div class='contain contain_wh'>
+    <div style='margin-top:100px;margin-bottom:50px;text-align:center;'><h1 class='search_title'>☞숙소정보 검색</h1></div>
     <div class='room_wrap'>
 	<div style='text-align:center;'>
 	    <h2 class="tour_info" >여행 정보</h2>

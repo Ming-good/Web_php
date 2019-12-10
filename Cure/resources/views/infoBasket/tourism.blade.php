@@ -4,10 +4,11 @@
 <link rel="stylesheet" href="assets/css/tour.css" />
 <link rel="stylesheet" href="assets/css/main.css" />
 
-<div class='container' style='margin-top:100px;'>
+<div class='container'>
     <div class="tour_Wrap">
+	<div style='margin-top:100px;'><h1 class='search_title'>☞여행정보 검색</h1></div>
 	<form>
-	    <div class="sigungu">
+	    <div class="sigungu" style='margin-top:50px;'>
 	        <select id="area" name="area" class="select">
 		    <option value="0">지역 선택</option>
 	  @foreach($item as $row) 

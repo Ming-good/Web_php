@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/Cure/public/assets/css/join.css" />
 
 <div class='join_contain'  style="margin-top:100px;">
+    <div class='search_wrap'><h1 class='search_title'>☞숙소정보 검색</h1></div>
     <div class="con_select">
         <select id='selecting' class="selecting">
             <option>- - - - - 바구니 선택 - - - - -</option>

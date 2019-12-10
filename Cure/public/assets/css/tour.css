@@ -1,6 +1,6 @@
 
     .tableTD2{
-	width:60px;
+	width:700px;
 	border:none;
     }
 .detail {
@@ -60,7 +60,7 @@ padding:10px 10px 5px 10px;
 
 .tour_Wrap{
 width:1250px;
-height:800px;
+height:900px;
 text-align:center;
 }
 
@@ -232,7 +232,7 @@ text-align:left;
 #map_wrap
 {
 	margin-left:-300px;
-	margin-top:165px;
+	margin-top:308px;
 }
     .select {
         width:200px;
@@ -317,7 +317,6 @@ text-align:left;
     .basket_Wrap{
 	margin-left: 20px;
 	width:300px;
-	float:none;
     }
     .button2 {
 	right:-148px;

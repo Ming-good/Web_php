@@ -108,7 +108,7 @@
         }
         div.room_wrap {
                 height:450px;
-                width:270px;
+                width:300px;
         }
         div.map_css{
                 width:270px;
@@ -117,6 +117,7 @@
         }
         div.map_css2{
                 height:350px;
+		width:300px;
         }
         div.rooms_info{
                 height:635px;
