@@ -2,6 +2,62 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <script src="/Cure/public/assets/js/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="/Cure/public/assets/js/sign.js"></script>
+        <script type="text/javascript" src="/Cure/public/assets/js/toggle.js"></script>
+<script>
+$('document').ready(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    //유효성 검사
+    $("#TP").on("click", function(){
+	    if( "{{session() -> has('id') ?? ''}}" == "") {
+		    alert("로그인 해주십시오.");
+	    } else {
+		    location.href="/Cure/public/join/list";
+	    }
+    })
+    //유효성 검사
+    $("#eventStart").on("click", function(){
+            if( "{{session() -> has('id') ?? ''}}" == "") {
+                    alert("로그인 해주십시오.");
+            } else {
+                    location.href="/Cure/public/festival";
+            }
+    })
+
+
+
+    $("#log").on("submit", function(){
+    	var id = $("input[name=id]").val();
+ 	var pw = $("input[name=password]").val();
+    	$.ajax({
+		url:"/Cure/public/member/ck",
+   		type:"post",
+    		data:{"id":id, "pw":pw},
+		success:function(data){
+			if(data == "noID") {
+				$("#warning").empty()
+				$("#warning").append("아이디를 입력해 주세요.");
+			} else if (data == "noPW") {
+				$("#warning").empty()
+				$("#warning").append("비밀번호를 입력해 주세요.");
+			} else if (data == "falseID" | data == 'falsePw') {
+				$("#warning").empty()
+				$("#warning").append("아이디 또는 비밀번호가 잘못되었습니다.");
+			} else if(data == "success") {
+				location.reload();
+			}		
+
+    		}
+    	});
+	return false;
+    })
+})
+</script>
         <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1.0"/>
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -73,9 +129,9 @@
             <h1 class="title">Log in</h1>
             <form class="modal_login" id='log'>
               <label class="modal_label" for="id">ID</label>
-              <input class="modal_input" type="text" name="id" placeholder="Your ID" value="test" >
+              <input class="modal_input" type="text" name="id" placeholder="Your ID" value="testID" >
               <label class="modal_label" for="password">Password</label>
-              <input class="modal_input" type="password" name="password" placeholder="Your Password" value="!2zxcasd" >
+              <input class="modal_input" type="password" name="password" placeholder="Your Password" value="!1a2s3d4f" >
               <div style='color:red;' id='warning'></div>
               <input type="submit" id='submit' class="sign_submit" value="Login">
               <input type="button" class="sign_submit"value="Sign Up" onClick="location.href='membership.html'">
@@ -83,64 +139,8 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="/Cure/public/assets/js/sign.js"></script>
-    <script type="text/javascript" src="/Cure/public/assets/js/toggle.js"></script>
 @yield('content')
 
 
-<script>
-$('document').ready(function(){
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    //유효성 검사
-    $("#TP").on("click", function(){
-	    if( "{{session() -> has('id') ?? ''}}" == "") {
-		    alert("로그인 해주십시오.");
-	    } else {
-		    location.href="/Cure/public/join/list";
-	    }
-    })
-    //유효성 검사
-    $("#eventStart").on("click", function(){
-            if( "{{session() -> has('id') ?? ''}}" == "") {
-                    alert("로그인 해주십시오.");
-            } else {
-                    location.href="/Cure/public/festival";
-            }
-    })
-
-
-
-    $("#log").on("submit", function(){
-    	var id = $("input[name=id]").val();
- 	var pw = $("input[name=password]").val();
-    	$.ajax({
-		url:"/Cure/public/member/ck",
-   		type:"post",
-    		data:{"id":id, "pw":pw},
-		success:function(data){
-			if(data == "noID") {
-				$("#warning").empty()
-				$("#warning").append("아이디를 입력해 주세요.");
-			} else if (data == "noPW") {
-				$("#warning").empty()
-				$("#warning").append("비밀번호를 입력해 주세요.");
-			} else if (data == "falseID" | data == 'falsePw') {
-				$("#warning").empty()
-				$("#warning").append("아이디 또는 비밀번호가 잘못되었습니다.");
-			} else if(data == "success") {
-				location.reload();
-			}		
-
-    		}
-    	});
-	return false;
-    })
-})
-</script>
 </body>
 </html>

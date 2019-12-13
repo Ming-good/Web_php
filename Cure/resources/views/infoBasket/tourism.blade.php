@@ -31,6 +31,8 @@
 	<div id='content' class="content_Wrap">
 	   <div id="map" class="maps">
 	   </div>
+	   <div id='infomation'>
+	   </div>
 	</div>
 
 	<div id='basket_wrap' class="basket_Wrap">
@@ -103,6 +105,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 	            data:{"area":area, "areaName":areaName, "sigunguCode":sigunguCode, "cat1":cat1, "cat2":cat2},
 	            success:function(data){
 			$("#map").empty();
+			$("#infomation").empty();
 			var obj = JSON.parse(data);
 			var item = obj.event.response.body.items.item;
 
@@ -113,7 +116,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
         			level: 10 // 지도의 확대 레벨
     			};
 			var map = new kakao.maps.Map(mapContainer, mapOption);
-			$("#content").append("<div class='map_wrap' id ='map_wrap'><ul id='placesList'></ul></div>");
+			$("#infomation").append("<div class='map_wrap' id ='map_wrap'><ul id='placesList'></ul></div>");
 
 			var positions = [];
 			var content;
